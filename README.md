@@ -26,7 +26,6 @@ This tool succesfully tested with:
 ## Installation
 Install ``python3`` and the following python dependencies on your system:
 
-- numpy
 - pandas
 
 Checkout this repository and copy the script ``cleancopy.py`` into the working directory of your LaTeX document
@@ -48,15 +47,15 @@ For LaTeX dependencies:
 python3 cleancopy.py -L manuscript.tex
 ```
 
-### Create a Copy for ArXiV (-A)
+### Create a copy for ArXiV (-A)
 
 - Identify dependencies with pdfLaTeX
 - Include ``manuscript.bbl`` and ``manuscript.bib``
 - Copy to subdirectory ``[outdir]`` (-o)
-- Strip all comments from ``.tex``-files in ``[outdir]`` (-s)
+- Strip all comments from ``.tex``-files in ``[outdir]``
 
 ```sh
-python3 cleancopy.py -A -s -o [outdir] manuscript.tex
+python3 cleancopy.py -A -o [outdir] manuscript.tex
 ```
 
 ### Create a Camera-Ready Copy for Paper Submissions (-C)
@@ -64,10 +63,10 @@ python3 cleancopy.py -A -s -o [outdir] manuscript.tex
 - Identify dependencies with LaTeX
 - Include ``manuscript.dvi`` and ``manuscript.bib``
 - Copy to subdirectory ``[outdir]`` (-o)
-- Strip all comments from ``.tex``-files in ``[outdir]`` (-s)
- 
+- Strip all comments from ``.tex``-files in ``[outdir]``
+
 ```sh
-python3 cleancopy.py -C -s -o [outdir] manuscript.tex
+python3 cleancopy.py -C -o [outdir] manuscript.tex
 ```
 
 ## Contact

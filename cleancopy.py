@@ -3,7 +3,6 @@
 import os
 import shutil
 
-import numpy as np
 import pandas as pd
 import subprocess
 import argparse
@@ -124,11 +123,19 @@ def main():
     additional_ext = ADDITIONAL_EXT
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-P", "--pdflatex", help="scan dependencies with pdflatex (default)", action="store_true")
-    parser.add_argument("-L", "--latex", help="scan dependencies with latex", action="store_true")
-    parser.add_argument("-A", "--arxiv", help="scan dependencies for ArXiV", action="store_true")
-    parser.add_argument("-C", "--cameraready", help="scan dependencies for DVI-based submissions", action="store_true")
-    parser.add_argument("-s", "--stripcomments", help="strip commens from tex files", action="store_true")
+
+    preset = parser.add_argument_group("Output format")
+    grp = preset.add_mutually_exclusive_group()
+    grp.add_argument("-P", "--pdflatex", help="scan dependencies with pdflatex (default)", action="store_true")
+    grp.add_argument("-L", "--latex", help="scan dependencies with latex", action="store_true")
+    grp.add_argument("-A", "--arxiv", help="scan dependencies for ArXiV", action="store_true")
+    grp.add_argument("-C", "--cameraready", help="scan dependencies for DVI-based submissions", action="store_true")
+    
+    strip = parser.add_argument_group("Redact comments")
+    grp = strip.add_mutually_exclusive_group()
+    grp.add_argument("-s", "--strip-comments", help="strip comments from tex files (default)", action="store_true", default=True)
+    grp.add_argument(      "--no-strip-comments", help="do not strip comments from tex files", action="store_false", dest="strip_comments")
+
     parser.add_argument("-c", "--compiler", help="override TeX/LaTeX compiler")
     parser.add_argument("-o", "--outputpath", help="copy all dependencies into directory (otherwise only print deps to stdout)")
     parser.add_argument("texname", nargs=1, help="basename of top-level tex file")
@@ -140,26 +147,17 @@ def main():
         exit(1)
     texname = args.texname[0]
 
-    # presets
-    opts = 0
+    # Presets
     if args.pdflatex:
-        opts = opts + 1
         compiler = COMPILER_PDFLATEX
     if args.latex:
-        opts = opts + 1
         compiler = COMPILER_LATEX
     if args.arxiv:
-        opts = opts + 1
         compiler = COMPILER_PDFLATEX
         additional_ext.extend(ADDITIONAL_EXT_ARXIV)
     if args.cameraready:
-        opts = opts + 1
         compiler = COMPILER_LATEX
         additional_ext.extend(ADDITIONAL_EXT_CAMERAREADY)
-    
-    if opts > 1:
-        print("More than one preset specified", file=sys.stderr)
-        exit(1)
     
     # manual override for compiler
     if args.compiler is not None:
@@ -187,7 +185,7 @@ def main():
     files.extend(args.extra_files)
     
     if args.outputpath is not None:
-        copy_files(files, args.outputpath, args.stripcomments)
+        copy_files(files, args.outputpath, args.strip_comments)
     else:
         print(*files, sep = "\n")
         
