@@ -4,7 +4,7 @@ Cleancopy for LaTeX documents
 This repository contains a tool ``cleancopy.py`` to identify all dependencies for compilation of a top-level LaTeX document.
 Its main purpose is to quickly create clean copy of a LaTeX document and its dependencies for camera-ready submissions, ArXiV submissions and so on.
 
-Optionally, comments inside the LaTeX documents can be stripped/redacted as well.
+By default, comments inside the LaTeX documents are stripped/redacted as well.
 
 ## Caution
 This script potentially (over)writes and modifies files on your disk. Ensure you have backups of your documents you plan to run this script on, e.g. a remote GIT repository. Do not apply this script on your backup copy.
