@@ -6,6 +6,11 @@ Its main purpose is to quickly create clean copy of a LaTeX document and its dep
 
 By default, comments inside the LaTeX documents are stripped/redacted as well.
 
+## How it works
+Running ``latex`` or ``pdflatex`` with the command ``-record``/``-recorder`` brings the compilers to print the paths of all accessed files during a run (for input or output) into a ``.fls`` file.
+The cleancopy script triggers such a translation and reads the provided file to obtain a list of dependencies.
+Only relative paths are assumed as necessary dependencies, while absolute paths are discarded as they are assumed to be libraries/fonts/etc. that come with the LaTeX installation on the system.
+
 ## Caution
 This script potentially (over)writes and modifies files on your disk. Ensure you have backups of your documents you plan to run this script on, e.g. a remote GIT repository. Do not apply this script on your backup copy.
 
@@ -31,8 +36,8 @@ This tool succesfully tested with:
 
 - Checkout this repository and link or copy the script ``cleancopy.py`` into the working directory of your LaTeX document
 
-## Usage
-For the examples we assume ``manuscript.tex`` to be the top-level LaTeX file we want to operate on.
+## Usage Examples
+For the following examples we assume ``manuscript.tex`` to be the top-level LaTeX file we want to operate on.
 
 ### List dependencies only
 Print a list of dependencies to ``stdout`` without creating any copy. Note that the script triggers the translation of the top-level tex file with the predefined TeX compiler.
@@ -59,7 +64,7 @@ python3 cleancopy.py -L manuscript.tex
 python3 cleancopy.py -A -o [outdir] manuscript.tex
 ```
 
-### Create a Camera-Ready Copy for Paper Submissions (-C)
+### Create a Camera-Ready Copy (CRC) for Paper Submissions (-C)
 
 - Identify dependencies with LaTeX
 - Include ``manuscript.dvi`` and ``manuscript.bib``
