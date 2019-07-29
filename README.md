@@ -24,11 +24,12 @@ This tool succesfully tested with:
 - Windows + MikTeX
 
 ## Installation
-Install ``python3`` and the following python dependencies on your system:
 
-- pandas
+- Install compilers for LaTeX (e.g. TexLive or MikTeX)
+- Install ``python3`` and the following python packages on your system:
+    - pandas
 
-Checkout this repository and link or copy the script ``cleancopy.py`` into the working directory of your LaTeX document
+- Checkout this repository and link or copy the script ``cleancopy.py`` into the working directory of your LaTeX document
 
 ## Usage
 For the examples we assume ``manuscript.tex`` to be the top-level LaTeX file we want to operate on.
