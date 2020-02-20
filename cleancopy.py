@@ -37,7 +37,7 @@ EXCLUDE_EXT = [
     ]
 
 # Also copy all files with "texname".{ADDITIONAL_EXT}
-ADDITIONAL_EXT = ['bib']
+ADDITIONAL_EXT = []     # removed 'bib' from here
 # Conditional extensions
 ADDITIONAL_EXT_ARXIV = ['bbl']
 ADDITIONAL_EXT_CAMERAREADY = ['dvi']
@@ -139,7 +139,7 @@ def main():
     parser.add_argument("-c", "--compiler", help="override TeX/LaTeX compiler")
     parser.add_argument("-o", "--outputpath", help="copy all dependencies into directory (otherwise only print deps to stdout)")
     parser.add_argument("texname", nargs=1, help="basename of top-level tex file")
-    parser.add_argument("extra_files", nargs='*', help="additional files to copy")
+    parser.add_argument("extra_files", nargs='*', help="additional files to copy, e.g. bibliography")
     args = parser.parse_args()
 
     if args.texname is None:

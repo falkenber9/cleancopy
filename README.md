@@ -56,9 +56,9 @@ python3 cleancopy.py -L manuscript.tex
 ### Create a copy for ArXiV (-A)
 
 - Identify dependencies with pdfLaTeX
-- Include ``manuscript.bbl`` and ``manuscript.bib``
+- Include ``manuscript.bbl``
 - Copy to subdirectory ``[outdir]`` (-o)
-- Strip all comments from ``.tex``-files in ``[outdir]``
+- Strip all comments from ``.tex`` and ``.tikz`` files in ``[outdir]``
 
 ```sh
 python3 cleancopy.py -A -o [outdir] manuscript.tex
@@ -67,12 +67,19 @@ python3 cleancopy.py -A -o [outdir] manuscript.tex
 ### Create a Camera-Ready Copy (CRC) for Paper Submissions (-C)
 
 - Identify dependencies with LaTeX
-- Include ``manuscript.dvi`` and ``manuscript.bib``
+- Include ``manuscript.dvi``
 - Copy to subdirectory ``[outdir]`` (-o)
-- Strip all comments from ``.tex``-files in ``[outdir]``
+- Strip all comments from ``.tex`` and ``.tikz`` files in ``[outdir]``
 
 ```sh
 python3 cleancopy.py -C -o [outdir] manuscript.tex
+```
+
+### Note: Bibliography
+Generally, no ``.bib`` files are required for the compilation with latex/pdflatex if a ``.bbl`` file is found. I you wish to include your ``.bib`` files, you can add it to the list of additional files at the end of the command line:
+
+```sh
+python3 cleancopy.py -A -o [outdir] manuscript.tex Bibliography.bib AnotherExtraFile.foo
 ```
 
 ## Contact
